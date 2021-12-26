@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+// @use '@angular/material' as mat;
+
+@include mat-core();
+// $my-app-primary: mat-palette($mat-blue-grey);
+// $my-app-accent:  mat-palette($mat-pink, 500, 900, A100);
+// $my-app-warn:    mat-palette($mat-deep-orange);
+$app-primary:$mat-blue;
+$app-accent:$mat-grey;
+$app-warn:$mat-deep-orange;
+$my-app-primary: mat-palette($app-primary);
+$my-app-accent:  mat-palette($app-accent);
+$my-app-warn:    mat-palette($app-warn);
+
+
+$my-app-theme: mat-light-theme($my-app-primary,$my-app-accent,$my-app-warn);
+
+// $dark-primary: mat.define-palette(mat.$pink-palette);
+// $dark-accent: mat.define-palette(mat.$blue-gray-palette);
+
+@include angular-material-theme($my-app-theme);

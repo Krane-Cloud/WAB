@@ -159,3 +159,5 @@ class AbstractDataRetrive(AbstractServiceClass):
                 UTILS
     #####################################
     """
+
+class AbstractAuthClass(AbstractServiceClass):pass

@@ -13,6 +13,19 @@
                 "runserver"
             ],
             "django": true
+        },
+        {
+            "name": "Freeze Python Packages",
+            "type": "python",
+            "request": "launch",
+            "program": "-m",
+            "args": [ 
+                "pip",   
+                "freeze",
+                ">",
+                "${workspaceFolder}\\src\\api\\requirements.txt"          
+            ],
+            "django": true
         }
     ]
 }
