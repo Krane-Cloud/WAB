@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "NG Program",
+            "request": "launch",
+            "runtimeArgs": [
+                "run-script",
+                "debug"
+            ],
+            "runtimeExecutable": "npm",
+            
+            "skipFiles": [
+                "src/web/node_internals**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "Api Django",
             "type": "python",
             "request": "launch",
