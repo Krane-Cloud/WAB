@@ -7,13 +7,15 @@ import json
 class Users(AbstractAuthClass):
     def get(self):
         data={}
-        if self.httpRequest.user.is_authenticated and self.httpRequest.user.is_active:
+        if self.httpRequest.user.is_active:
             user=self.httpRequest.user
             for field in users_default_data:
                 data[field]=str(getattr(user,field))
+        message="Users data has been extracted!"
+        if len(data)==0:
+            message="User is disabled!"
 
-
-        return {"message":"Users data has been extracted!","status":"OK","data":data},200    
+        return {"message":message,"status":"OK","data":data},200    
         
         
 
