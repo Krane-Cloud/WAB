@@ -13,32 +13,27 @@ export class VariablesService {
   currentMainLinks:NavigationTree[]=[
     {
       name:'Home',
-      icon:'dashboard',
-      href:['dashboard'],
+      icon:'home',
+      href:['dev'],
       tooltip:'Dashboard Home',
     },
   
     {
-      name:'Servers',
+      name:'Applications',
       icon:'dns',
-      href:['dashboard','servers'],
+      href:['dev','apps'],
+      tooltip:'Applications Menu',
+      children:[
+        {name:"Create application",icon:"add",href:["dev","apps,","create"]},
+        {name:"View applications",icon:"menu_open",href:["dev","apps,","create"]}
+      ]
+    },
+    {
+      name:'Manage Files',
+      icon:'cloud_upload',
+      href:['dev','apps'],
       tooltip:'Servers Menu',
-      // children:this.serversLink
-    },
-    {
-      name:'Install',
-      icon:'downloading',
-      href:['dashboard','install'],
-      tooltip:'Install an application on a server',
-      // children:this.serversLink
-    },
-    {
-      name:'Aplications Installed',
-      icon:'analytics',
-      href:['dashboard','apps_installed'],
-      tooltip:'See installed apps',
-      // children:this.serversLink
-    },
+    }
   ]
   constructor() { }
 }
