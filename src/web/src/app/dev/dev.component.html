@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
@@ -6,4 +6,63 @@
     <span class="dev-nav-spacer"></span>
 
   </mat-toolbar>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+
+
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+  <mat-sidenav #drawer  mode="push" opened="false" class="sidenav" autosize>
+    <mat-toolbar class="mat-toolbar" style="background: inherit;" alt="logo">
+        <img class="noselect logo-img" width="64" height="64" src="../../assets/WAB_LOGO.png">
+        <span class="noselect logo-title" >Web Application Builder</span>
+   </mat-toolbar>
+   <mat-nav-list>
+    <app-navigations-links  *ngFor="let item of navItems" [item]="item"></app-navigations-links>
+    </mat-nav-list>
+
+  <mat-toolbar class="navbar-buttom" alt="logo">
+      <div class="menu-buttons-navbar">
+          <button mat-icon-button class="button-icon" aria-label="Settings">
+              <mat-icon>settings</mat-icon>
+          </button>
+          <button mat-icon-button class="button-icon"  aria-label="Settings">
+              <mat-icon>info</mat-icon>
+          </button>
+          <button mat-icon-button class="button-icon"  aria-label="Settings">
+              <mat-icon>support_agent</mat-icon>
+          </button>
+          
+      </div>
+      
+  </mat-toolbar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon >menu</mat-icon>
+      </button>
+      <span>Welcome {{user.username}}</span>
+      <span class="spacer"></span>
+
+      <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+       <mat-icon>share</mat-icon>
+     </button> -->
+    </mat-toolbar>
+    <div class="content">
+        <div class="content-inside-router">
+            <router-outlet></router-outlet>
+        </div>
+      </div>
+  
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

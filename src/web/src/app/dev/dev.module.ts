@@ -8,11 +8,16 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { NavigationsLinksComponent } from './navigations-links/navigations-links.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
     DevComponent,
-    HomeComponent
+    HomeComponent,
+    NavigationsLinksComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +25,10 @@ import { HomeComponent } from './home/home.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class DevModule { }

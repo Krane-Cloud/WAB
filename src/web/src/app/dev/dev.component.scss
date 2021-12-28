@@ -1,3 +1,121 @@
 .dev-nav-spacer{
     flex: 1 1 auto;
 }
+@import "../layouts/styles/utils.scss";
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import "../../theme.scss";
+.spacer {
+    flex: 1 1 auto;
+  }
+ 
+.sidenav-container {
+    height: 100%;
+  }
+  
+
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+
+
+  .spacer-toolbar {
+    flex: 1 1 auto;
+  }
+
+
+  .full-width {
+    width: 100%;
+  }
+  
+.shipping-card {
+min-width: 120px;
+margin: 20px auto;
+}
+
+.mat-radio-button {
+display: block;
+margin: 5px 0;
+}
+
+.row {
+display: flex;
+flex-direction: row;
+}
+
+.col {
+flex: 1;
+margin-right: 20px;
+}
+
+.col:last-child {
+margin-right: 0;
+}
+.logo-title{
+    font-family: 'Lobster', cursive;
+}
+.navbar-buttom{
+    position: absolute;
+    bottom: 0;
+}
+
+.button-icon{
+  margin-right: 0.5rem;
+}
+.menu-buttons-navbar{
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+.content{
+  position: relative;
+  height: 100%;
+  // width: 100%;
+  background-color: rgb(251, 253, 255);
+  background-size: cover;
+  overflow: auto;
+  .content-inside-router{
+    position: relative;
+    width: 70%;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+}
+@media screen and (min-width:1400px) {
+
+::-webkit-scrollbar {
+  margin: 100px;
+  width: 20px;
+}
+
+:-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 100px;
+  
+}
+::-webkit-scrollbar-thumb {
+  border: 5px solid transparent;
+  border-radius: 100px;
+  background-color: mat-color($app-primary, 50);
+  background-clip: content-box;
+  transition: scrollbar-color 0.3s ease-out;
+}
+::-webkit-scrollbar-thumb:hover {
+  border: 5px solid transparent;
+  border-radius: 100px;
+  background-color: mat-color($app-primary, 500);
+  background-clip: content-box;
+  transition: scrollbar-color 0.3s ease-out;
+}
+}
+
+
+.auto-card-width{
+  @media screen and (min-width:1400px) {
+    width: 100%;
+    
+  }
+}
