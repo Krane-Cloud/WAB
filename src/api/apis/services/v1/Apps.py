@@ -1,6 +1,6 @@
 
 from apis.services.base import AbstractServiceClass
-from apis.models import WABApps,AppSettings,WABPagesTemplates,WABPages
+from apis.models import WABApps,AppSettings,WABPagesTemplates,WABPages,UsersTable
 from apis.utils.web import WebUtil
 import threading
 import logging as log, traceback, sys
@@ -22,7 +22,7 @@ class Apps(AbstractServiceClass):
             if type_of_app not in supported_apps:
                 raise ValueError(f"The entered type of app {type_of_app} is not supported yet. :(")
         except Exception as err:
-            return self.returnResult("A validation error has occured.",False,errors={"validation_error":err})
+            return self.returnResult("A validation error has occured.",False,errors={"validation_error":str(err)})
         
 
         wab_version=AppSettings.objects.filter(name="VERSION").first()
@@ -30,21 +30,23 @@ class Apps(AbstractServiceClass):
         instance=WABApps()
         instance.name=name
         instance.owner=owner
-        instance.wab_version=wab_version
+        instance.wab_version=wab_version.value
         instance.available=False
         instance.save()
 
         appID=str(instance.id).replace("-","")
 
-        asyncRun=threading.Thread(target=self.generateScrach,args=(appID))
-        asyncRun.start()
+        self.generateScrach(appID)
+
+        # asyncRun=threading.Thread(target=Apps.generateScrach,args=(appID))
+        # asyncRun.start()
 
 
         return self.returnResult("Application added with success!",True,data={"application":{
             "id":appID,
             "name":name,
             "owner":owner,
-            "wab_version":wab_version
+            "wab_version":wab_version.value
         }})
 
 
@@ -54,19 +56,19 @@ class Apps(AbstractServiceClass):
             return True
         return False
 
-
+    
     def generateScrach(self,appID:str):
         
         try:
 
-            scrachTemplate=WABPagesTemplates.objects.filter(id=0).values("html_content","js_content")
+            scrachTemplate=WABPagesTemplates.objects.filter(id=0).first()#.values("html_content","js_content")
                 
             page_instance=WABPages()
             page_instance.name="Scrach Application Build"
             page_instance.appID=appID
             page_instance.appPageID=0
-            page_instance.html_content=scrachTemplate['html_content']
-            page_instance.js_content=scrachTemplate['js_content']
+            page_instance.html_content=scrachTemplate.html_content
+            page_instance.js_content=scrachTemplate.js_content
             page_instance.save()
 
             # make Application available
@@ -78,9 +80,24 @@ class Apps(AbstractServiceClass):
             traceback.print_exc(file=sys.stdout)
 
 
+    def get_apps(self):
+        owner=self.getUserID()
+
+        retData=[]
+        q=list(WABApps.objects.filter(owner=owner))
+        for row in q:
+            data=self.recordToDict(row,WABApps)
+            data["username"]=self.getUserName(data["owner"])
+            retData.append(data)
+        
+        return self.returnResult("Applications fetched!",True,data=retData)   
+
+    def getUserName(self,userID:str)->str:
+        q=UsersTable.objects.filter(id=userID).first()
+        return str(q.username)
 
     """Security Methods"""
     def allowedHTTPMethods(self): return ['GET', 'POST']
-    def allowedServices(self): return ["add_app"]
+    def allowedServices(self): return ["add_app","get_apps"]
     def isAllowedAccess(self): return True
-    def isAllowedAnonymmus(self): return False # put to False if you want to force the API call to be executed as a logged in user
+    def isAllowedAnonymmus(self): return False 

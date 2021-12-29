@@ -1,0 +1,40 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Created by  </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+    <ng-container matColumnDef="added_on">
+      <th mat-header-cell *matHeaderCellDef> Created on </th>
+      <td mat-cell *matCellDef="let element"> {{element.added_on | date}} </td>
+    </ng-container>
+
+      <ng-container matColumnDef="wab_version">
+        <th mat-header-cell *matHeaderCellDef> WAB Version </th>
+        <td mat-cell *matCellDef="let element"> {{element.wab_version}} </td>
+      </ng-container>
+      <ng-container matColumnDef="available">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> 
+            <p *ngIf="element.available">Available</p>    
+            <p *ngIf="!element.available">Not available</p>    
+        
+        </td>
+      </ng-container>
+    <ng-container matColumnDef="ops">
+      <th mat-header-cell *matHeaderCellDef>Options</th>
+      <td mat-cell *matCellDef="let element">
+          <a color="primary" mat-button target="blank" [routerLink]="'/dev/apps/edit/'+element.id"><mat-icon>visibility</mat-icon></a>
+          <button color="warn" mat-button  (click)="delete_app(element.id)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  

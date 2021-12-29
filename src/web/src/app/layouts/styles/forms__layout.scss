@@ -1,0 +1,81 @@
+@import "../../../theme.scss";
+.component__main{
+    width: 100%;
+    height: 100%;
+    .component__container{
+        position: relative;
+        max-width: 70%;
+        min-width: 50%;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+}
+.component__footer{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 3rem;
+    // background: rgba($color: mat-color($app-primary,100), $alpha: 0.5);
+    .separator__footer{
+        position: absolute;
+
+        
+    }
+    .component__footer__content{
+        position: relative;
+        width: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        display: flex;
+        color: mat-color($app-primary,100);
+        font-size: large;
+        .left{
+            position: absolute;
+
+            left: 0%;
+        }
+        .right{
+            position: absolute;
+            right: 0%;
+        }
+
+        .component__footer__designed{
+            a{
+                color: mat-color($app-primary,100);
+            
+                text-decoration: none;
+                font-size: 1em;
+                position: relative;
+                transition: all 0.6s;
+                &:before {
+                  content: "";
+                  width: 0;
+                  height: 0.1em;
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  background: mat-color($app-primary,700);
+                  transition: all 0.3s;
+                }
+                &:hover {
+                  &:before {
+                    width: 100%;
+                    left: 0;
+                    background: mat-color($app-warn,900);;
+                  }
+                }
+            }
+       
+        }
+    }
+}
+
+.form-submit-class{
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-start;
+    width: 100%;
+}

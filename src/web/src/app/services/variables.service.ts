@@ -21,18 +21,18 @@ export class VariablesService {
     {
       name:'Applications',
       icon:'dns',
-      href:['dev','apps'],
+      // href:['dev','apps'],
       tooltip:'Applications Menu',
       children:[
-        {name:"Create application",icon:"add",href:["dev","apps,","create"]},
-        {name:"View applications",icon:"menu_open",href:["dev","apps,","create"]}
+        {name:"Create application",icon:"add",href:["dev","apps","add"]},
+        {name:"Show applications",icon:"menu_open",href:["dev","apps","list"]}
       ]
     },
     {
       name:'Manage Files',
       icon:'cloud_upload',
       href:['dev','apps'],
-      tooltip:'Servers Menu',
+      tooltip:'Add or delete files',
     }
   ]
   constructor() { }

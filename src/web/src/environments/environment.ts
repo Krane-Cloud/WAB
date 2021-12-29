@@ -11,6 +11,9 @@ export const environment = {
   api_routes:{
     login:`${apiModules.authenticate}/primary/login`,
     getUserData:`${apiModules.authenticate}/users/get`,
-    isAuthenticated:`${apiModules.authenticate}/validate/is_auth`
+    isAuthenticated:`${apiModules.authenticate}/validate/is_auth`,
+    getUsername:`${apiModules.authenticate}/users/get_username`,
+    add_app:`${apiModules.v1}/apps/add_app`,
+    get_apps:`${apiModules.v1}/apps/get_apps`,
   }
 };

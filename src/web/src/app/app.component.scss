@@ -1,3 +1,6 @@
+
+@import "../styles.scss";
+
 ::ng-deep .notif-class-success{
     background-color:white;
     color:#016319;
@@ -9,4 +12,10 @@
   ::ng-deep .notif-class-warning{
     background-color:white;
     color:orange;
+  }
+  .loading-container {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
   }
