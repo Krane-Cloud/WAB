@@ -38,10 +38,6 @@ class Apps(AbstractServiceClass):
 
         self.generateScrach(appID)
 
-        # asyncRun=threading.Thread(target=Apps.generateScrach,args=(appID))
-        # asyncRun.start()
-
-
         return self.returnResult("Application added with success!",True,data={"application":{
             "id":appID,
             "name":name,
