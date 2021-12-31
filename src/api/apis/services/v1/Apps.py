@@ -38,7 +38,6 @@ class Apps(AbstractServiceClass):
 
         self.generateScrach(appID)
 
-
         return self.returnResult("Application added with success!",True,data={"application":{
             "id":appID,
             "name":name,
