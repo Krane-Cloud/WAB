@@ -37,7 +37,7 @@ class Apps(AbstractServiceClass):
         appID=str(instance.id).replace("-","")
 
         self.generateScrach(appID)
-
+ 
         return self.returnResult("Application added with success!",True,data={"application":{
             "id":appID,
             "name":name,
