@@ -42,11 +42,42 @@ export class ListAppsComponent implements OnInit {
     }
 
     if(confirm(`Are you sure you want to delete ${app.name}?`)){
-      // do delete
+      const formData= new FormData()
+
+
+      
+
+      formData.append('appID',String(app.id))
+
+      console.log(formData.get("appID"));
+      
+
+      this.http.post(environment.api_routes.remove_app,formData,{withCredentials:true})
+      .toPromise()
+      .then(
+        (response:any)=>{
+          this.notifS.sendSuccess(response.message)
+          
+          // removes the app from the datasource list
+          let newDS:any[]=[]; 
+          for(let i in this.dataSource)
+            if(this.dataSource[i].id!=app.id)
+              newDS.push(this.dataSource[i]);
+          
+          this.dataSource=newDS
+        
+        }
+      ).catch(
+        (error)=>{
+        let errors:string=""
+        for(let i in error.error.errors)
+          errors+=`${error.error.errors[i]}`
+
+        this.notifS.sendDanger(errors)
+        }
+      )
     }
 
 
   }
-
-
 }

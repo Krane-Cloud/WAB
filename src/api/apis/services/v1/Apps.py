@@ -2,7 +2,6 @@
 from apis.services.base import AbstractServiceClass
 from apis.models import WABApps,AppSettings,WABPagesTemplates,WABPages,UsersTable
 from apis.utils.web import WebUtil
-import threading
 import logging as log, traceback, sys
 
 supported_apps=["EMPTY"]
@@ -92,8 +91,36 @@ class Apps(AbstractServiceClass):
         q=UsersTable.objects.filter(id=userID).first()
         return str(q.username)
 
+
+    def remove_app(self):
+        try:
+            appID=WebUtil.getParamValue(self.httpRequest,"appID",True)
+            if len(str(appID).strip())==0:
+                raise ValueError("Parameter appID can't be empty.")
+        except Exception as err:
+            return self.returnResult("A validation error has occured.",False,errors={"validation_error":str(err)})
+
+        owner=self.getUserID()
+        instance=WABApps.objects.get(pk=appID,owner=owner)
+        has_been_deleted=False
+        try:
+            instance.delete()
+            has_been_deleted=True
+        except Exception as err:
+            return self.returnResult("An error has occured while trying to delete the application.",False,errors={"validation_error":str(err)})
+        
+        if has_been_deleted:
+            try:
+                instance=WABPages.objects.get(appID=appID)
+                instance.delete()
+            except Exception as err:
+                print(err)
+            return self.returnResult("Delete was finished with no errors.",True)            
+        else:
+            return self.returnResult("Delete was finished with errors.",False)
+
     """Security Methods"""
     def allowedHTTPMethods(self): return ['GET', 'POST']
-    def allowedServices(self): return ["add_app","get_apps"]
+    def allowedServices(self): return ["add_app","get_apps","remove_app"]
     def isAllowedAccess(self): return True
     def isAllowedAnonymmus(self): return False 
