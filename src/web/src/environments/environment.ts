@@ -17,5 +17,7 @@ export const environment = {
     get_apps:`${apiModules.v1}/apps/get_apps`,
     validateCon:`${apiModules.authenticate}/primary/validate_connection`,
     remove_app: `${apiModules.v1}/apps/remove_app`,
+    validate_access_app: `${apiModules.v1}/apps/validate_access`,
+
   }
 };

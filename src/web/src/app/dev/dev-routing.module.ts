@@ -6,6 +6,7 @@ import { DevComponent } from './dev.component';
 import { AddAppComponent } from './apps/add/add.component';
 import { ListAppsComponent } from './apps/list/list.component';
 import { EditAppComponent } from './apps/edit/edit.component';
+import { EditPageComponent } from './apps/edit-page/edit-page.component';
 
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./authenticate/authenticate.module').then(m => m.AuthenticateModule) },
@@ -15,6 +16,7 @@ const routes: Routes = [
       {path:"add",component:AddAppComponent},
       {path:"list",component:ListAppsComponent},
       {path:"edit/:appID",component:EditAppComponent},
+      {path:"edit-page/:pageID",component:EditPageComponent},
       {path:"",redirectTo:"add",pathMatch:"full"}
     ]},
     {path:"",redirectTo:"home",pathMatch:"full"}

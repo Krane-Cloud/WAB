@@ -76,10 +76,14 @@ class Apps(AbstractServiceClass):
 
 
     def get_apps(self):
+        appID=WebUtil.getParamValue(self.httpRequest,"appID",False)
         owner=self.getUserID()
-
         retData=[]
-        q=list(WABApps.objects.filter(owner=owner))
+        if appID:
+            q=list(WABApps.objects.filter(id=appID,owner=owner))
+        else:
+            q=list(WABApps.objects.filter(owner=owner))
+
         for row in q:
             data=self.recordToDict(row,WABApps)
             data["username"]=self.getUserName(data["owner"])
@@ -119,8 +123,55 @@ class Apps(AbstractServiceClass):
         else:
             return self.returnResult("Delete was finished with errors.",False)
 
+
+    def edit_appbase(self):
+
+        try:
+            appID=WebUtil.getParamValue(self.httpRequest,"appID",True)
+            app_name=WebUtil.getParamValue(self.httpRequest,"appName",True)
+            if len(str(appID).strip())==0:
+                raise ValueError("appID can't be empty!")
+            if len(str(app_name).strip())==0:
+                raise ValueError("AppName can't be empty!")
+
+        except Exception as err:
+            return self.returnResult("A validation error has occured.",False,errors={"validation_error":str(err)})
+
+        owner=self.getUserID()
+
+        try:
+            instance=WABApps.objects.get(pk=appID,owner=owner)
+        except Exception:
+            return self.returnResult("A validation error has occured!.",False,errors={"validation_error":"An application with the provided ID doesn't exists!"})
+        instance.name=app_name
+        instance.update()
+
+        new_data={}
+        new_data["appID"]=appID
+        new_data["appName"]=app_name
+
+
+        return self.returnResult("Application edited with success!.",True,data=new_data)
+
+    def validate_access(self):
+        
+        try:
+            appID=WebUtil.getParamValue(self.httpRequest,"appID",True)
+            if len(str(appID).strip())==0:
+                raise ValueError("AppID can't be empty!")
+        except Exception as err:
+            return self.returnResult("A validation error has occured.",False,errors={"validation_error":str(err)})
+
+        q=WABApps.objects.filter(id=appID)
+        if q.count()>0:
+            return self.returnResult("Validate access",True,data={"access_guard":"true"})
+        return self.returnResult("Validate access",True,data={"access_guard":"false"})
+
+
+
+
     """Security Methods"""
     def allowedHTTPMethods(self): return ['GET', 'POST']
-    def allowedServices(self): return ["add_app","get_apps","remove_app"]
+    def allowedServices(self): return ["add_app","get_apps","remove_app","edit_appbase","validate_access"]
     def isAllowedAccess(self): return True
-    def isAllowedAnonymmus(self): return False 
+    def isAllowedAnonymmus(self): return False  

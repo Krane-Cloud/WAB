@@ -21,6 +21,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { EditPageComponent } from './apps/edit-page/edit-page.component';
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 @NgModule({
   declarations: [
     DevComponent,
@@ -28,7 +31,8 @@ import {MatSelectModule} from '@angular/material/select';
     NavigationsLinksComponent,
     AddAppComponent,
     ListAppsComponent,
-    EditAppComponent
+    EditAppComponent,
+    EditPageComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +50,8 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule
     
   ]
 })
