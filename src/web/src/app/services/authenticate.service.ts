@@ -40,4 +40,17 @@ export class AuthenticateService {
     if (r == 'false') return false;
     else return true;
   }
+
+
+  async validateConnection(){
+    let r: any;
+
+    await this.http
+      .get(environment.api_routes.validateCon, { withCredentials: true })
+      .toPromise()
+      .then(() => (r = true))
+      .catch(()=>(r=false))
+      ;
+    return r;
+  }
 }

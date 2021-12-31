@@ -31,8 +31,8 @@ export class VariablesService {
     {
       name:'Manage Files',
       icon:'cloud_upload',
-      href:['dev','apps'],
-      tooltip:'Add or delete files',
+      href:['dev','files-management'],
+      tooltip:'Manage Addition Files',
     }
   ]
   constructor() { }

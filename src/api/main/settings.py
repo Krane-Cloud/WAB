@@ -4,6 +4,11 @@ from pathlib import Path
 
 from main.functions import generateRandomString
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,11 +63,11 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wab',
-        'USER': 'wab', 
-        'PASSWORD': 'wab',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.getenv("DB_DATABASE"),
+        'USER': os.getenv("DB_USER"), 
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
 AUTH_USER_MODEL = 'apis.UsersTable'

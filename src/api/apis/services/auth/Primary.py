@@ -22,12 +22,14 @@ class Primary(AbstractAuthClass):
         if self.httpRequest.user.is_authenticated:
             llogout(self.httpRequest)
             return {"message": "You have been logged out with success!", "status": "OK"},200
-        return {"message": "You are already logged out!", "status": "WARNING"}, 400
+        return {"message": "You are already logged out!", "status": "NOK"}, 400
 
+    def validate_connection(self):
+        return {"message": "Backend is running!", "status": "OK"}, 200
 
 
     """Security Methods"""
     def allowedHTTPMethods(self): return ['GET', 'POST']
-    def allowedServices(self): return ["login","logout"]
+    def allowedServices(self): return ["login","logout","validate_connection"]
     def isAllowedAccess(self): return True
     def isAllowedAnonymmus(self): return True # put to False if you want to force the API call to be executed as a logged in user

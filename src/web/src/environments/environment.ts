@@ -15,5 +15,6 @@ export const environment = {
     getUsername:`${apiModules.authenticate}/users/get_username`,
     add_app:`${apiModules.v1}/apps/add_app`,
     get_apps:`${apiModules.v1}/apps/get_apps`,
+    validateCon:`${apiModules.authenticate}/primary/validate_connection`,
   }
 };
