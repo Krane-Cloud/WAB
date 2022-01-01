@@ -23,7 +23,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { EditPageComponent } from './apps/edit-page/edit-page.component';
 
-import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatSortModule} from '@angular/material/sort'; 
+
+
+
 @NgModule({
   declarations: [
     DevComponent,
@@ -51,7 +55,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatInputModule,
     MatSelectModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatPaginatorModule,
+    MatSortModule
     
   ]
 })

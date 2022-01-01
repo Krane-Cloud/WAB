@@ -1,26 +1,33 @@
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
 })
-export class EditAppComponent implements OnInit {
+export class EditAppComponent implements OnInit,AfterViewInit {
   appID: string;
   appMainSettings:any={name:""};
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  pagesdisplayedColumns: string[] = ["page_id",'name', 'added_on',"available",  'ops'];
+  pagesData:any[] = [];
+  pagesDatasource=new MatTableDataSource(this.pagesData);
 
   editMainAppSettingsForm = this.formBuilder.group({
     name: [null, Validators.required],
 
   });
-
-
-
 
   constructor(
     private http: HttpClient,
@@ -33,6 +40,17 @@ export class EditAppComponent implements OnInit {
 
   hasAccess = true;
 
+
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.pagesDatasource.filter = filterValue.trim().toLowerCase();
+
+    if (this.pagesDatasource.paginator) {
+      this.pagesDatasource.paginator.firstPage();
+    }
+  }
+
   ngOnInit(): void {
     this.validateAccess(this.appID);
     if (this.hasAccess) {
@@ -40,7 +58,9 @@ export class EditAppComponent implements OnInit {
       this.fetchPages(this.appID);
     }
   }
-
+  ngAfterViewInit() {
+    this.pagesDatasource.paginator = this.paginator;
+  }
   validateAccess(appID: string) {
     const formData = new FormData();
     formData.append('appID', appID);
@@ -72,12 +92,21 @@ export class EditAppComponent implements OnInit {
     .toPromise()
     .then(
       (response:any)=>
-        this.appMainSettings=response.data[0]
-
-      
+        this.appMainSettings=response.data[0]      
     )
   }
-  async fetchPages(appID: string) {}
+  async fetchPages(appID: string) {
+    this.http.get(`${environment.api_routes.get_pages}?appID=${appID}`,{withCredentials:true})
+    .toPromise()
+    .then(
+      (response:any)=>{
+        this.pagesDatasource.data=response.data
+        
+      }
+    )
+
+
+  }
 
   async editMainAppSettings() {}
 }

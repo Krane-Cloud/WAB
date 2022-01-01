@@ -167,11 +167,34 @@ class Apps(AbstractServiceClass):
             return self.returnResult("Validate access",True,data={"access_guard":"true"})
         return self.returnResult("Validate access",True,data={"access_guard":"false"})
 
+    def get_pages(self):
+        try:
+            appID=WebUtil.getParamValue(self.httpRequest,"appID",True)
+            if len(str(appID).strip())==0:
+                raise ValueError("AppID can't be empty!")
+            pageID=WebUtil.getParamValue(self.httpRequest,"pageID",False)
+        except Exception as err:
+            return self.returnResult("A validation error has occured.",False,errors={"validation_error":str(err)})
+        retData=[]
+        if len(str(pageID).strip())>0 and pageID is not None:
+            q=list(WABPages.objects.filter(appID=appID,appPageID=pageID))
+        else:
+            q=list(WABPages.objects.filter(appID=appID))
+        for row in q:
+            data=self.recordToDict(row,WABPages)
+            new_data={}
+            for i in data:
+                new_data[i]=str(data[i])
+
+            retData.append(new_data)
+        return self.returnResult("Pages fetched!",True,data=retData)   
+        
+
 
 
 
     """Security Methods"""
     def allowedHTTPMethods(self): return ['GET', 'POST']
-    def allowedServices(self): return ["add_app","get_apps","remove_app","edit_appbase","validate_access"]
+    def allowedServices(self): return ["add_app","get_apps","get_pages","remove_app","edit_appbase","validate_access"]
     def isAllowedAccess(self): return True
     def isAllowedAnonymmus(self): return False  

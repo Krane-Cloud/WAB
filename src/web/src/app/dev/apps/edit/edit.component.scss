@@ -1,1 +1,18 @@
 @import "../../../layouts/styles/forms__layout.scss";
+
+
+.main__basesettings{
+    position: relative;
+   margin-bottom: 1rem;
+
+}
+.main__showPages{
+    position: relative;
+    margin-top: 1rem;
+    top: 10%;
+}
+.table-pages{
+    width: 100%;
+    border: none;
+    outline: none;
+}
