@@ -40,8 +40,6 @@ export class EditAppComponent implements OnInit,AfterViewInit {
 
   hasAccess = true;
 
-
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.pagesDatasource.filter = filterValue.trim().toLowerCase();
@@ -108,5 +106,26 @@ export class EditAppComponent implements OnInit,AfterViewInit {
 
   }
 
-  async editMainAppSettings() {}
+  async editMainAppSettings() {
+    if(this.editMainAppSettingsForm.invalid)
+      return;
+    
+    const data=this.editMainAppSettingsForm.value;
+
+    const formData = new FormData()
+    formData.append('appID',this.appID)
+    formData.append('appName',data.name)
+
+
+    this.http.post(
+      environment.api_routes.edit_app,
+      formData,{withCredentials:true}
+    ).toPromise()
+    .then(
+      (response:any)=>{
+        this.appMainSettings=response.data
+        this.notifS.sendSuccess(response.message)
+      }
+    )
+  }
 }

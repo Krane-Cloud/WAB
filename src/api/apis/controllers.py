@@ -23,7 +23,8 @@ class ServiceController:
                 raise PermissionError(msg)
             fnc=getattr(instanceService,action)
             data,code= fnc()
-        except AttributeError:
+        except AttributeError as err:
+            print(str(err))
             data={'message':"ERR","error":f"Unreconized action!"}
             code=400
         except PermissionError as err:
