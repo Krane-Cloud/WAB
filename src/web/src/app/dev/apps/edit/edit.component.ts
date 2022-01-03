@@ -14,7 +14,7 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./edit.component.scss'],
 })
 export class EditAppComponent implements OnInit,AfterViewInit {
-  appID: string;
+  public appID: string;
   appMainSettings:any={name:""};
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

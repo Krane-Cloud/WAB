@@ -21,6 +21,8 @@ export const environment = {
     remove_app: `${apiModules.v1}/apps/remove_app`,
     validate_access_app: `${apiModules.v1}/apps/validate_access`,
     validate_access_page: `${apiModules.v1}/pages/validate_access`,
+    save_page: `${apiModules.v1}/pages/save_page`,
+    get_page_details: `${apiModules.v1}/pages/get_page_details`,
 
   }
 };

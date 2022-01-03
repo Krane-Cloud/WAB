@@ -29,8 +29,8 @@ class WABPages(models.Model):
     name=models.CharField(max_length=32,null=False)
     appID=models.UUIDField(null=False,db_index=True)
     appPageID=models.BigIntegerField(null=False)
-    html_content=models.BinaryField(null=True,blank=True)
-    js_content=models.BinaryField(null=True,blank=True)
+    html_content=models.CharField(max_length=4000,null=True,blank=True)
+    js_content=models.CharField(max_length=4000,null=True,blank=True)
     added_on=models.DateTimeField(default=timezone.now)
     available=models.BooleanField(default=True)
 
@@ -44,7 +44,7 @@ class AppSettings(models.Model):
         db_table="AppSettings"
 
 class WABPagesTemplates(models.Model):
-    html_content=models.BinaryField(null=True,blank=True)
-    js_content=models.BinaryField(null=True,blank=True)
+    html_content=models.CharField(max_length=4000,null=True,blank=True)
+    js_content=models.CharField(max_length=4000,null=True,blank=True)
     class Meta:
         db_table="WABPagesTemplates"

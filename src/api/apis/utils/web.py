@@ -30,3 +30,6 @@ class WebUtil:
         for param in paramNames:
             js[param]=WebUtil.getParamValue(request,param,mandatory,defaultValue)
         return js
+    @staticmethod
+    def convertBytesContent2Str(Bytes:bytes)->str:
+        return str(Bytes.decode("utf-8"))
