@@ -15,8 +15,7 @@
     <ngx-monaco-editor class="editor-container" [options]="editorOptionsJS" [(ngModel)]="codeJS"></ngx-monaco-editor>
     <ngx-monaco-editor class="editor-container" [options]="editorOptionsHTML" [(ngModel)]="codeHTML"></ngx-monaco-editor>
     <div class="container__actions">
-        <button (click)="save_code()" mat-raised-button color="primary">Save Code</button>
+        <button class="button_save" (click)="save_code()" mat-raised-button color="primary">Save Code <mat-icon>save</mat-icon></button>
+        <button class="button_view" routerLink="/view/{{appID}}/{{pageID}}" mat-raised-button color="warn">View page <mat-icon>visibility</mat-icon></button>
     </div>
-    
-    
 </div>

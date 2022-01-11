@@ -8,8 +8,7 @@
             "name": "NG Program",
             "request": "launch",
             "runtimeArgs": [
-                "run-script",
-                "debug"
+                "start"
             ],
             "runtimeExecutable": "npm",
             

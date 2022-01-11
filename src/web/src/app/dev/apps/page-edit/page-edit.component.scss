@@ -28,4 +28,22 @@
         
     }
   }
+  .container__actions{
+    position: absolute;
+    bottom: 0%;
+    display: flex;
+    width: 100%;
+    flex: 1 auto 1;
+    .button_save{
+      position: absolute;
+      left: 0%;
+      width: 40%;
+    }
+    .button_view{
+      position: absolute;
+      right: 0%;
+      margin-left: 1rem;
+      width: 40%;
+    }
+  }
 }

@@ -96,9 +96,9 @@ class Pages(AbstractServiceClass):
             if len(str(appID).strip())==0:
                 raise ValueError("AppID can't be empty!")
 
-            valid=self.make_access_validation(appID,pageID)
-            if valid[0]["data"]["access_guard"]=="false":
-                raise PermissionError("You are not allowed to get this page!")
+            # valid=self.make_access_validation(appID,pageID)
+            # if valid[0]["data"]["access_guard"]=="false":
+            #     raise PermissionError("You are not allowed to get this page!")
 
         except Exception as err:
             return self.returnResult("A validation error has occured.",False,errors={"validation_error":str(err)})
@@ -107,11 +107,13 @@ class Pages(AbstractServiceClass):
 
         # htmlCode=WebUtil.convertBytesContent2Str(q.html_content)
         # jsCode=WebUtil.convertBytesContent2Str(q.js_content)
-        htmlCode=q.html_content
-        jsCode=q.js_content
+        htmlCode=str(q.html_content)
+        jsCode=str(q.js_content)
 
         retData={"appID":appID,"pageID":pageID,"htmlCode":htmlCode,"jsCode":jsCode}
         return self.returnResult("Page fetched!",True,data=retData)   
+
+
 
     """Security Methods"""
     def allowedHTTPMethods(self): return ['GET', 'POST']

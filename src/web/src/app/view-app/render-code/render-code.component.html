@@ -1,0 +1,10 @@
+
+
+<main class="render__code__main__container">
+    <div *ngIf="isOK" class="render__code__ifHasCode">
+        <div [innerHTML]="codeHTML"></div>
+    </div>
+    <div *ngIf="!isOK" class="render__code__noCode">
+        <h1>Something whent wrong while trying to render the page!</h1>
+    </div>
+</main>

@@ -8,7 +8,10 @@ const routes: Routes = [
     { path: 'dev',canActivate:[ValidateApiConnectionGuard], loadChildren: () => import('./dev/dev.module').then(m => m.DevModule) },
     { path: 'error', loadChildren: () => import('./error-pages/error-pages.module').then(m => m.ErrorPagesModule) },
     {path:"",redirectTo:"dev",pathMatch:"full"},
+  { path: 'view', loadChildren: () => import('./view-app/view-app.module').then(m => m.ViewAppModule) },
+    
     {path:"**",redirectTo:"error/404",pathMatch:"full"}
+
   ]},
   
 ];
