@@ -65,9 +65,6 @@ class Main:
             else:
                 break
 
-
-
-
         if platform.system() == "Linux":
             if self.prompt_sudo() != 0:
                 print("We need access to root-like privileges, in order to install the WAB application.")
@@ -121,6 +118,7 @@ class Main:
         pass
 
     def prompt_sudo(self):
+        print("\tCheck accessing rights.")
         ret = 0
         if os.geteuid() != 0:
             msg = "[sudo] password for %u:"
@@ -138,6 +136,7 @@ if __name__ == "__main__":
             a = Main(devMode=True)
         else:
             a = Main()
+        a.start()
 
     except Exception as err:
         print("An error occured while tring to install the WAB Application.")
